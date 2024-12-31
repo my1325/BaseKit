@@ -15,7 +15,7 @@ extension BK_Color: BK_ColorCompatible {
     public var bk_color: BK_Color { self }
 }
 
-extension UInt: BK_ColorCompatible {
+extension Int: BK_ColorCompatible {
     public var bk_color: BK_Color {
         BK_Color(self)
     }
@@ -147,7 +147,7 @@ public extension View {
     }
     
     func bk_shadow(
-        bk_color: BK_ColorCompatible,
+        _ bk_color: BK_ColorCompatible,
         bk_radius: CGFloat,
         bk_x: CGFloat,
         bk_y: CGFloat
@@ -161,14 +161,14 @@ public extension View {
     }
     
     func bk_border(
-        bk_color: BK_ColorCompatible,
+        _ bk_color: BK_ColorCompatible,
         bk_width: CGFloat
     ) -> some View {
         border(bk_color.bk_color.bk_swiftUIColor, width: bk_width)
     }
     
     func bk_overlay(
-        bk_color: BK_ColorCompatible,
+        _ bk_color: BK_ColorCompatible,
         bk_alignment: Alignment = .center
     ) -> some View {
         overlay(bk_color.bk_color.bk_swiftUIColor, alignment: bk_alignment)
@@ -177,61 +177,31 @@ public extension View {
 
 public extension Shape {
     func bk_stroke(
-        bk_color: BK_ColorCompatible,
+        _ bk_color: BK_ColorCompatible,
         bk_lineWidth: CGFloat
     ) -> some View {
         stroke(bk_color.bk_color.bk_swiftUIColor, lineWidth: bk_lineWidth)
     }
     
     func bk_fill(
-        bk_color: BK_ColorCompatible
+        _ bk_color: BK_ColorCompatible
     ) -> some View {
         fill(bk_color.bk_color.bk_swiftUIColor)
     }
 }
 
-#endif
-
-extension BK_ColorCompatible {
-    public static var bk_black: BK_Color { BK_Color(0x000000) }
-    
-    public static var bk_white: BK_Color { BK_Color(0xFFFFFF) }
-    
-    public static var bk_red: BK_Color { BK_Color(0xFF0000) }
-    
-    public static var bk_green: BK_Color { BK_Color(0x00FF00) }
-    
-    public static var bk_blue: BK_Color { BK_Color(0x0000FF) }
-    
-    public static var bk_yellow: BK_Color { BK_Color(0xFFFF00) }
-    
-    public static var bk_cyan: BK_Color { BK_Color(0x00FFFF) }
-    
-    public static var bk_magenta: BK_Color { BK_Color(0xFF00FF) }
-    
-    public static var bk_orange: BK_Color { BK_Color(0xFFA500) }
-    
-    public static var bk_purple: BK_Color { BK_Color(0x800080) }
-    
-    public static var bk_brown: BK_Color { BK_Color(0xA52A2A) }
-    
-    public static var bk_clear: BK_Color { BK_Color(0x000000, bk_alpha: 0) }
-    
-    public static var bk_gray: BK_Color { BK_Color(0x808080) }
-    
-    public static var bk_darkGray: BK_Color { BK_Color(0xA9A9A9) }
-    
-    public static var bk_lightGray: BK_Color { BK_Color(0xD3D3D3) }
-    
-    public static func bk_rgb(
-        _ bk_red: UInt,
-        _ bk_green: UInt,
-        _ bk_blue: UInt
-    ) -> BK_Color {
-        BK_Color(
-            bk_red: bk_red,
-            bk_green: bk_green,
-            bk_blue: bk_blue
+public extension LinearGradient {
+    init(
+        _ bk_colors: [BK_ColorCompatible],
+        bk_startPoint: UnitPoint = .topLeading,
+        bk_endPoint: UnitPoint = .bottomTrailing
+    ) {
+        self.init(
+            colors: bk_colors.map(\.bk_color.bk_swiftUIColor),
+            startPoint: bk_startPoint,
+            endPoint: bk_endPoint
         )
     }
 }
+
+#endif

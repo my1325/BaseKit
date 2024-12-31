@@ -27,9 +27,9 @@ public struct BK_Color: Sendable {
     }
     
     public init(
-        bk_red: UInt = 255,
-        bk_green: UInt = 255,
-        bk_blue: UInt = 255,
+        bk_red: Int = 255,
+        bk_green: Int = 255,
+        bk_blue: Int = 255,
         bk_alpha: Double = 1
     ) {
         self.init(
@@ -40,7 +40,7 @@ public struct BK_Color: Sendable {
         )
     }
     
-    public init(_ bk_hex: UInt, bk_alpha: Double = 1) {
+    public init(_ bk_hex: Int, bk_alpha: Double = 1) {
         let bk_red = (bk_hex >> 16) & 0xFF
         let bk_green = (bk_hex >> 8) & 0xFF
         let bk_blue = bk_hex & 0xFF
@@ -77,3 +77,47 @@ public extension BK_Color {
     }
 }
 #endif
+
+extension BK_Color {
+    public static var bk_black: BK_Color { BK_Color(0x000000) }
+    
+    public static var bk_white: BK_Color { BK_Color(0xFFFFFF) }
+    
+    public static var bk_red: BK_Color { BK_Color(0xFF0000) }
+    
+    public static var bk_green: BK_Color { BK_Color(0x00FF00) }
+    
+    public static var bk_blue: BK_Color { BK_Color(0x0000FF) }
+    
+    public static var bk_yellow: BK_Color { BK_Color(0xFFFF00) }
+    
+    public static var bk_cyan: BK_Color { BK_Color(0x00FFFF) }
+    
+    public static var bk_magenta: BK_Color { BK_Color(0xFF00FF) }
+    
+    public static var bk_orange: BK_Color { BK_Color(0xFFA500) }
+    
+    public static var bk_purple: BK_Color { BK_Color(0x800080) }
+    
+    public static var bk_brown: BK_Color { BK_Color(0xA52A2A) }
+    
+    public static var bk_clear: BK_Color { BK_Color(0x000000, bk_alpha: 0) }
+    
+    public static var bk_gray: BK_Color { BK_Color(0x808080) }
+    
+    public static var bk_darkGray: BK_Color { BK_Color(0xA9A9A9) }
+    
+    public static var bk_lightGray: BK_Color { BK_Color(0xD3D3D3) }
+    
+    public static func bk_rgb(
+        _ bk_red: Int,
+        _ bk_green: Int,
+        _ bk_blue: Int
+    ) -> BK_Color {
+        BK_Color(
+            bk_red: bk_red,
+            bk_green: bk_green,
+            bk_blue: bk_blue
+        )
+    }
+}

@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-#if canImport(Colors)
-import Colors
+#if canImport(BKColors)
+import BKColors
 #endif
 
-#if canImport(Images)
-import Images
+#if canImport(BKImages)
+import BKImages
 #endif
 
 public enum BK_AttributedStringItem {
@@ -40,7 +40,7 @@ public enum BK_AttributedStringItem {
     case bk_underlineColor(BK_ColorCompatible)
     case bk_writingDirection(NSWritingDirection)
 
-    public var attributes: [NSAttributedString.Key: Any] {
+    public var bk_attributes: [NSAttributedString.Key: Any] {
         switch self {
         case let .bk_font(font): return [.font: font]
         case let .bk_foregroundColor(color): return [.foregroundColor: color.bk_color.bk_uiColor]
@@ -72,7 +72,7 @@ public enum BK_AttributedStringItem {
 
 public extension Array where Element == BK_AttributedStringItem {
     var bk_attributes: [NSAttributedString.Key: Any] {
-        reduce([:]) { $0.merging($1.attributes, uniquingKeysWith: { $1 }) }
+        reduce([:]) { $0.merging($1.bk_attributes, uniquingKeysWith: { $1 }) }
     }
 }
 

@@ -28,8 +28,8 @@ extension UIImage: BK_ImageCompatible {
     }
 }
 
-#if canImport(Colors)
-import Colors
+#if canImport(BKColors)
+import BKColors
 #endif
 
 extension BK_ImageCompatible where Self: BK_ColorCompatible {
@@ -51,9 +51,9 @@ extension BK_ImageCompatible where Self: BK_ColorCompatible {
     }
 }
 
-extension UInt: BK_ImageCompatible { }
 extension BK_Color: BK_ImageCompatible { }
 extension UIColor: BK_ImageCompatible { }
+extension Int: BK_ImageCompatible { }
 
 extension Array: BK_ImageCompatible where Element: BK_ColorCompatible {
     public var bk_image: BK_Image {

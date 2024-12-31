@@ -8,15 +8,17 @@ let package = Package(
     platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(name: "Colors", targets: ["Colors"]),
-        .library(name: "Images", targets: ["Images"]),
-        .library(name: "AttributeString", targets: ["AttributeString"]),
+        .library(name: "BKColors", targets: ["BKColors"]),
+        .library(name: "BKImages", targets: ["BKImages"]),
+        .library(name: "BKAttributes", targets: ["BKAttributes"]),
+        .library(name: "BKPermissions", targets: ["BKPermissions"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
-        .target(name: "Colors"),
-        .target(name: "Images", dependencies: ["Colors"]),
-        .testTarget(name: "AttributeString", dependencies: ["Images", "Colors"]),
+        .target(name: "BKColors"),
+        .target(name: "BKPermissions"),
+        .target(name: "BKImages", dependencies: ["BKColors"]),
+        .target(name: "BKAttributes", dependencies: ["BKImages", "BKColors"]),
     ]
 )
