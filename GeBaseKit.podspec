@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
- s.name             = "BaseKit"
+ s.name             = "GeBaseKit"
  s.version           = "0.0.2"
  s.summary         = "BaseKit for my's ioser"
  s.homepage        = "https://github.com/my1325/BaseKit.git"
