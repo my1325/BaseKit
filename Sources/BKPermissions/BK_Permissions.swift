@@ -17,26 +17,13 @@ public enum BK_AuthorizationOrigin: Sendable {
     case bk_appTracking
 }
 
-public enum BK_AuthorizationStatus {
-    var bk_isAuthorized: Bool {
-        self == .bk_authorized
-    }
-
+public enum BK_AuthorizationStatus: Sendable {
     case bk_notDetermined
     case bk_denied
     case bk_authorized
-}
-
-public enum BK_PermisionsError: Error {
-    case bk_denied(BK_AuthorizationOrigin)
     
-    public var bk_errorMessage: String {
-        switch self {
-        case .bk_denied(.bk_camera):  "Please allow to access your camera"
-        case .bk_denied(.bk_microphone): "Please allow to access your microphone"
-        case .bk_denied(.bk_photoLibrary): "Please allow to access your Photos"
-        default: ""
-        }
+    public var bk_isAuthorized: Bool {
+        self == .bk_authorized
     }
 }
 
@@ -79,16 +66,13 @@ public final class BK_Permisions {
 
     public static func bk_requestAuthorization(
         _ bk_origin: BK_AuthorizationOrigin
-    ) async throws -> BK_AuthorizationStatus {
-        guard bk_authorization(bk_origin) != .bk_denied else {
-            throw BK_PermisionsError.bk_denied(bk_origin)
-        }
+    ) async -> BK_AuthorizationStatus {
         switch bk_origin {
         case .bk_appTracking:
             if #available(iOS 14.5, *) {
                 return await bk_requestAppTracking()
             } else {
-                return .bk_denied
+                return .bk_authorized
             }
         case .bk_camera:
             return await bk_requestAvDeviceType(.video)
