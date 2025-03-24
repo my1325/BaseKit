@@ -180,6 +180,8 @@ public extension LinearGradient {
 
 public protocol BK_SwiftUIStyleCompatible {
     associatedtype S: View
+    
+    @MainActor
     var bk_colorStyle: S { get }
 }
 
@@ -222,7 +224,7 @@ public extension View {
 }
 
 public extension Shape {
-    func bk_stroke<S>(
+    @MainActor func bk_stroke<S>(
         _ bk_style: S,
         bk_lineWidth: CGFloat = 1
     ) -> some View where S: BK_SwiftUIStyleCompatible, S.S: ShapeStyle {
@@ -232,7 +234,7 @@ public extension Shape {
         )
     }
 
-    func bk_fill<S>(
+    @MainActor func bk_fill<S>(
         _ bk_style: S
     ) -> some View where S: BK_SwiftUIStyleCompatible, S.S: ShapeStyle {
         fill(bk_style.bk_colorStyle)
